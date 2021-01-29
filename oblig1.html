@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Test Site</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+    
+</head>
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script src="Oblig.js"></script>
+<script>
+
+// Gyldig og Ugyldig dato____________________________________________________________________________________________________________________
+
+            QUnit.test('Gyldig dato', function(assert) {      
+            let validDate = isDateValid('11.12.2020');
+            assert.equal(validDate, true, 'Funksjonen skal returnere true hvis parameterverdien er en gyldig dato - og false ellers.')
+            });
+
+            QUnit.test('Ugyldig dato', function(assert) {
+            let validDate = isDateValid('30.02.20200');
+            assert.equal(validDate, false, 'Funksjonen skal returnere true hvis parameterverdien er en Ugyldig dato - og false ellers.')
+            });
+
+// Gyldig og Ugyldig lenge__________________________________________________________________________________________________________________
+
+            QUnit.test('Gyldig lengde', function(assert) {
+            let validDate = isDateValid('11.12.2020');
+            assert.equal(validDate, true, 'Teksten må ha lengde 10.')
+            });
+
+            QUnit.test('Ugyldig lengde', function(assert) {
+            let validDate = isDateValid('11.12.202');
+            assert.equal(validDate, false, 'Teksten skal ikke ha lengde 10.')
+            });
+// Gyldig og Ugyldig punktum plassering_____________________________________________________________________________________________________
+
+            QUnit.test('Punktum plassering', function(assert) {
+            let validDate = isDateValid('11.12.2020');
+            assert.equal(validDate, true, 'Det må være punktum i tredje posisjon og i sjette posisjon.')
+            });
+
+            QUnit.test('Ugyldig Punktum plassering', function(assert) {
+            let validDate = isDateValid('11.1220.20');
+           
+            assert.equal(validDate, false, 'Det må ikke være punktum i tredje posisjon og i sjette posisjon.')
+            });
+// // Gyldig og Ugyldig år lengde______________________________________________________________________________________________________________
+
+            QUnit.test('År lengde', function(assert) {
+            let validDate = isDateValid('11.12.9999');
+            assert.equal(validDate, true, 'År er 0000 eller større.')
+            });
+
+            QUnit.test('Ugyldig År lengde', function(assert) {
+            let validDate = isDateValid('11.12.99999');
+            assert.equal(validDate, false, 'År er ikke 0000 eller større.')
+            });
+// Gyldig og Ugyldig måned__________________________________________________________________________________________________________________
+
+            QUnit.test('Gyldig mndte', function(assert) {
+            let validDate = isDateValid('11.01.2020');
+            assert.equal(validDate, true, 'Måned er fra og med 01 til og med 12.')
+            });
+
+            QUnit.test('Ugyldig mndte', function(assert) {
+            let validDate = isDateValid('11.00.2020');
+            assert.equal(validDate, false, 'Måned er ikke fra og med 01 til og med 12.')
+            });
+// Gyldig og ugyldig skuddår________________________________________________________________________________________________________________
+
+            QUnit.test('UGyldig dag', function(assert) {
+            let validDate = isDateValid('30.02.2020');
+            assert.equal(validDate, false, '30 er lov for alle måneder utenom februar')
+            });
+
+            QUnit.test('Gyldig dag i forhold til mndte', function(assert) { 
+            let validDate = isDateValid('31.01.2020');
+            assert.equal(validDate, true, '31 er lovlig for januar, mars, mai, juli, august, oktober og desember')
+            });
+
+            QUnit.test('februar og skuddår', function(assert) {
+            let validDate = isDateValid('29.02.2020');
+            assert.equal(validDate, true, 'En test som viser at 29. februar blir gyldig når det er skuddår')
+            });
+
+            QUnit.test('Feil skudd år', function(assert) {
+            let validDate = isDateValid('29.02.2021');
+            assert.equal(validDate, false, 'Feil skuddår')
+            });
+</script>
+</body>
+</html>
