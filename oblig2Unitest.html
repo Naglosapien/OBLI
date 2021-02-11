@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.11.1.css">
+    <title>Oblig2</title>
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.11.1.js"></script>
+    <script src="oblig2.js"></script>
+
+    <div id='app'></div>
+    <script>
+
+    let numbers = [7, 3, 1, 5, 8];
+    let chosenBar='';
+    let inputValue='';
+    let disabledBar='disabled';
+
+    function show(){};
+
+    QUnit.test('Valgt en Stolpe', function(assert) {
+    Chosen(1);
+      const actual = chosenBar;
+      const expected = 1;
+      assert.equal(actual, expected);
+      
+    });
+
+    QUnit.test('Valgt samme Stolpe', function(assert) {
+    chosenBar =2;
+    Chosen(2);
+      const actual = chosenBar;
+      const expected = '';
+      assert.equal(actual, expected);
+    });
+
+    QUnit.test('Valgt annen Stolpe', function(assert) {
+    chosenBar =2;
+    Chosen(3);
+      const actual = chosenBar;
+      const expected =3;
+      assert.equal(actual, expected);
+    });
+
+    QUnit.test('Endret stolpe', function(assert) {
+    numbers = [7, 3, 1, 5, 8];
+    chosenBar =2;
+    inputValue =7;
+    change();
+      const actual =numbers;
+      const expected = [7, 7, 1, 5, 8];
+      assert.deepEqual(actual, expected);
+    });
+
+    QUnit.test('Lagt til stolpe', function(assert) {
+    numbers = [7, 3, 1, 5, 8];
+    inputValue =3;
+    adding();
+      const actual =numbers;
+      const expected = [7, 3, 1, 5, 8, 3];
+      assert.deepEqual(actual, expected);
+    });
+
+    QUnit.test('Slettet stolpe', function(assert) {
+        numbers = [7, 3, 1, 5, 8];
+        chosenBar =1;
+        remove();
+        const actual =numbers;
+        const expected = [3, 1, 5, 8];
+        assert.deepEqual(actual, expected);
+    });
+    
+    </script>
+</body>
+</html>
